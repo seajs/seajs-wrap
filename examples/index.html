@@ -10,4 +10,7 @@ seajs.use('/examples/cmd', function(Cmd) {
   var str = Cmd();
   console.log(str);
 });
+seajs.use('/examples/nowrap.js?nowrap', function() {
+  console.log(window.nowrap);
+});
 </script>

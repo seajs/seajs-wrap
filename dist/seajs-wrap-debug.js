@@ -10,14 +10,18 @@ seajs.on("resolve", function(data) {
   var id = data.id
   if (!id) return ""
 
-  var m = id.match(/[^?]+(\.\w+)?(?:\?|#|$)/)
+  var m = id.match(/[^?]+(\.\w+)?(\?.*)?$/)
   var uri = seajs.resolve(id, data.refUri)
 
   if (m && (m[1] === '.js' || !m[1])) {
+    var query = m[2] || '';
     wrapExec[uri] = function(uri, content) {
       var wrapedContent;
       var defineReg = /define\(\s*function\s*\(\s*require\s*(.*)?\)\s*\{/;
-      if (defineReg.test(content)) {
+      var defineReg2 = /define\(\s*\w+\s*\)/;
+      if (defineReg.test(content) ||
+          defineReg2.test(content) ||
+          query.indexOf('nowrap') > 0) {
         wrapedContent= content;
       } else {
         wrapedContent = 'define(function(require, exports, module) {\n' +
