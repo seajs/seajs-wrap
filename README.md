@@ -1,6 +1,8 @@
 seajs-wrap
 ==========
 
+[![Build Status](https://secure.travis-ci.org/afc163/seajs-wrap.png?branch=master)](https://travis-ci.org/afc163/seajs-wrap)
+
 The Sea.js plugin for loading CommonJS modules directly.
 
 It would wrap files with 'define(function(require, exports, module) {})' block so that you can load CommonJS modules without wrapping it first.
