@@ -1,0 +1,22 @@
+{
+  "name": "seajs-wrap",
+  "version": "1.0.0",
+  "description": "A Sea.js plugin for loading CommonJS file",
+  "keywords": ["seajs", "plugin", "CommonJS", "wrap"],
+  "author": "afc163 <afc163@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/seajs/seajs-wrap.git"
+  },
+  "devDependencies": {
+    "seatools": "*"
+  },
+  "config": {
+    "plugin-concat": [
+      "seajs-wrap.js"
+    ]
+  },
+  "spm": {
+    "main": "dist/seajs-wrap.js"
+  }
+}
