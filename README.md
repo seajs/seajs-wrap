@@ -38,5 +38,12 @@ module.exports = function() {
 }
 ```
 
-For more details please visit [中文文档](https://github.com/seajs/seajs-wrap/issues/1)
+- no wrap
 
+```html
+<script>
+seajs.use(['test.js?nowrap'], function() {
+  // it would excute test.js without wrapping
+})
+</script>
+```
