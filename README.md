@@ -49,3 +49,5 @@ seajs.use(['test.js?nowrap'], function() {
 })
 </script>
 ```
+
+For more details please visit [中文文档](https://github.com/seajs/seajs-wrap/issues/1).
