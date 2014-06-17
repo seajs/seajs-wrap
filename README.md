@@ -1,4 +1,4 @@
-seajs-wrap [![spm package](http://spmjs.io/badge/seajs-wrap)](http://spmjs.io/package/seajs-wrap) [![Build Status](https://secure.travis-ci.org/afc163/seajs-wrap.png?branch=master)](https://travis-ci.org/afc163/seajs-wrap)
+seajs-wrap [![spm package](http://spmjs.io/badge/seajs-wrap)](http://spmjs.io/package/seajs-wrap) [![Build Status](https://secure.travis-ci.org/seajs/seajs-wrap.png?branch=master)](https://travis-ci.org/seajs/seajs-wrap)
 ==========
 
 The Sea.js plugin for loading CommonJS modules directly.
