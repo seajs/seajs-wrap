@@ -16,8 +16,8 @@ seajs.on("resolve", function(data) {
     var query = m[2] || '';
     wrapExec[uri] = function(uri, content) {
       var wrapedContent;
-      var defineReg = /define\(\s*function\s*\(\s*require\s*(.*)?\)\s*\{/;
-      if (defineReg.test(content) ||
+      var CMD_REG = /define\(.*function\s*\(\s*require\s*(.*)?\)\s*\{/;
+      if (CMD_REG.test(content) ||
           query.indexOf('nowrap') > 0) {
         wrapedContent= content;
       } else {
