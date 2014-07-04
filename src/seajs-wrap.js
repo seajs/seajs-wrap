@@ -24,7 +24,7 @@ seajs.on("resolve", function(data) {
         wrapedContent = 'define(function(require, exports, module) {\n' +
                         content + '\n})';
       }
-      globalEval(wrapedContent);
+      globalEval(wrapedContent, uri);
     }
   }
 
@@ -69,10 +69,15 @@ function xhr(url, callback) {
   return r.send(null)
 }
 
-function globalEval(content) {
+function globalEval(content, uri) {
   if (content && /\S/.test(content)) {
     (global.execScript || function(content) {
-      (global.eval || eval).call(global, content)
+      try{
+        (global.eval || eval).call(global, content)
+      }catch(ex){
+        ex.fileName = uri;
+        console.error(ex);
+      }
     })(content)
   }
 }
