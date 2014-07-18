@@ -10,10 +10,10 @@ seajs.on("resolve", function(data) {
   var id = data.id
   if (!id) return ""
 
-  var m = id.match(/[^?]+(\.\w+)?(\?.*)?$/)
-  var uri = seajs.resolve(id, data.refUri)
+  var m = id.match(/[^?]+?(\.\w+)?(\?.*)?$/)
 
   if (m && (m[1] === '.js' || !m[1])) {
+    var uri = seajs.resolve(id, data.refUri)
     var query = m[2] || '';
     wrapExec[uri] = function(uri, content) {
       var wrapedContent;
@@ -25,11 +25,10 @@ seajs.on("resolve", function(data) {
         wrapedContent = 'define(function(require, exports, module) {\n' +
                         content + '\n})';
       }
-      globalEval(wrapedContent);
+      globalEval(wrapedContent, uri);
     }
+    data.uri = uri
   }
-
-  data.uri = uri
 })
 
 seajs.on("request", function(data) {
@@ -70,10 +69,15 @@ function xhr(url, callback) {
   return r.send(null)
 }
 
-function globalEval(content) {
+function globalEval(content, uri) {
   if (content && /\S/.test(content)) {
     (global.execScript || function(content) {
-      (global.eval || eval).call(global, content)
+      try{
+        (global.eval || eval).call(global, content)
+      }catch(ex){
+        ex.fileName = uri;
+        console.error(ex);
+      }
     })(content)
   }
 }
