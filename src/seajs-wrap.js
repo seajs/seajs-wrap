@@ -9,10 +9,10 @@ seajs.on("resolve", function(data) {
   var id = data.id
   if (!id) return ""
 
-  var m = id.match(/[^?]+(\.\w+)?(\?.*)?$/)
-  var uri = seajs.resolve(id, data.refUri)
+  var m = id.match(/[^?]+?(\.\w+)?(\?.*)?$/)
 
   if (m && (m[1] === '.js' || !m[1])) {
+    var uri = seajs.resolve(id, data.refUri)
     var query = m[2] || '';
     wrapExec[uri] = function(uri, content) {
       var wrapedContent;
@@ -26,9 +26,8 @@ seajs.on("resolve", function(data) {
       }
       globalEval(wrapedContent, uri);
     }
+    data.uri = uri
   }
-
-  data.uri = uri
 })
 
 seajs.on("request", function(data) {
