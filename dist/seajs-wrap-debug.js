@@ -16,16 +16,16 @@ seajs.on("resolve", function(data) {
     var uri = seajs.resolve(id, data.refUri)
     var query = m[2] || '';
     wrapExec[uri] = function(uri, content) {
-      var wrapedContent;
+      var wrappedContent;
       var CMD_REG = /define\(.*function\s*\(\s*require\s*(.*)?\)\s*\{/;
       if (CMD_REG.test(content) ||
           query.indexOf('nowrap') > 0) {
-        wrapedContent= content;
+        wrappedContent= content;
       } else {
-        wrapedContent = 'define(function(require, exports, module) {\n' +
+        wrappedContent = 'define(function(require, exports, module) {\n' +
                         content + '\n})';
       }
-      globalEval(wrapedContent, uri);
+      globalEval(wrappedContent, uri);
     }
     data.uri = uri
   }
@@ -71,10 +71,12 @@ function xhr(url, callback) {
 
 function globalEval(content, uri) {
   if (content && /\S/.test(content)) {
+    content = content + '//@ sourceURL=' + uri;
+    console.log(content);
     (global.execScript || function(content) {
-      try{
+      try {
         (global.eval || eval).call(global, content)
-      }catch(ex){
+      } catch(ex) {
         ex.fileName = uri;
         console.error(ex);
       }
