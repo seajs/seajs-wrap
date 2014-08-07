@@ -10,6 +10,11 @@ seajs.on("resolve", function(data) {
   var id = data.id
   if (!id) return ""
 
+  // avoid seajs-css plugin conflict
+  if (/\.css\.js$/.test(id)) {
+    return;
+  }
+
   var m = id.match(/[^?]+?(\.\w+)?(\?.*)?$/)
 
   if (m && (m[1] === '.js' || !m[1])) {
@@ -25,6 +30,7 @@ seajs.on("resolve", function(data) {
         wrappedContent = 'define(function(require, exports, module) {\n' +
                         content + '\n})';
       }
+      wrappedContent = wrappedContent + '//@ sourceURL=' + uri;
       globalEval(wrappedContent, uri);
     }
     data.uri = uri
@@ -71,8 +77,6 @@ function xhr(url, callback) {
 
 function globalEval(content, uri) {
   if (content && /\S/.test(content)) {
-    content = content + '//@ sourceURL=' + uri;
-    console.log(content);
     (global.execScript || function(content) {
       try {
         (global.eval || eval).call(global, content)
@@ -84,5 +88,5 @@ function globalEval(content, uri) {
   }
 }
 
-define("seajs/seajs-wrap/1.0.0/seajs-wrap-debug", [], {});
+define("seajs/seajs-wrap/1.0.1/seajs-wrap-debug", [], {});
 })();

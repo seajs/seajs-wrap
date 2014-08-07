@@ -1,6 +1,6 @@
 {
   "name": "seajs-wrap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Sea.js plugin for loading CommonJS file",
   "keywords": ["seajs", "plugin", "CommonJS", "wrap"],
   "author": "afc163 <afc163@gmail.com>",
