@@ -29,7 +29,7 @@ seajs.on("resolve", function(data) {
         wrappedContent = 'define(function(require, exports, module) {\n' +
                         content + '\n})';
       }
-      wrappedContent = wrappedContent + '//@ sourceURL=' + uri;
+      wrappedContent = wrappedContent + '//# sourceURL=' + uri;
       globalEval(wrappedContent, uri);
     }
     data.uri = uri
