@@ -70,8 +70,7 @@ function xhr(url, callback) {
 
 function globalEval(content, uri) {
   if (content && /\S/.test(content)) {
-    content = content + '//@ sourceURL=' + uri;
-    console.log(content);
+    content = content + '//@ sourceURL=' + uri
     (global.execScript || function(content) {
       try {
         (global.eval || eval).call(global, content)
