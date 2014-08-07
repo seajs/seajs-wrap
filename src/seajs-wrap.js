@@ -9,6 +9,11 @@ seajs.on("resolve", function(data) {
   var id = data.id
   if (!id) return ""
 
+  // avoid seajs-css plugin conflict
+  if (/\.css\.js$/.test(id)) {
+    return;
+  }
+
   var m = id.match(/[^?]+?(\.\w+)?(\?.*)?$/)
 
   if (m && (m[1] === '.js' || !m[1])) {
