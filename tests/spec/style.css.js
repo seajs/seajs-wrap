@@ -1,0 +1,1 @@
+window.styleObj = 123;
