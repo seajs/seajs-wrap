@@ -24,6 +24,7 @@ seajs.on("resolve", function(data) {
         wrappedContent = 'define(function(require, exports, module) {\n' +
                         content + '\n})';
       }
+      wrappedContent = wrappedContent + '//@ sourceURL=' + uri;
       globalEval(wrappedContent, uri);
     }
     data.uri = uri
@@ -70,7 +71,6 @@ function xhr(url, callback) {
 
 function globalEval(content, uri) {
   if (content && /\S/.test(content)) {
-    content = content + '//@ sourceURL=' + uri
     (global.execScript || function(content) {
       try {
         (global.eval || eval).call(global, content)
