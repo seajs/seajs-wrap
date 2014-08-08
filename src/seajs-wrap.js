@@ -15,8 +15,9 @@ seajs.on("resolve", function(data) {
   }
 
   var m = id.match(/[^?]+?(\.\w+)?(\?.*)?$/)
-
-  if (m) {
+  var isNotJSFile = /(\.css$)|(\.html$)/
+  
+  if (m && (m[1] === '.js' || !m[1] || !isNotJSFile.test(m[1]))) {
     var uri = seajs.resolve(id, data.refUri)
     var query = m[2] || '';
     wrapExec[uri] = function(uri, content) {
