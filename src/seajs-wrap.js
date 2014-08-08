@@ -15,8 +15,10 @@ seajs.on("resolve", function(data) {
   }
 
   var m = id.match(/[^?]+?(\.\w+)?(\?.*)?$/)
+  // not parse those types
+  var WhiteListReg = /\.(tpl|html|json|handlebars|css)/i
 
-  if (m && (m[1] === '.js' || !m[1])) {
+  if (m && (!WhiteListReg.test(m[1]) || !m[1])) {
     var uri = seajs.resolve(id, data.refUri)
     var query = m[2] || '';
     wrapExec[uri] = function(uri, content) {
