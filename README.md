@@ -3,7 +3,7 @@ seajs-wrap [![spm package](http://spmjs.io/badge/seajs-wrap)](http://spmjs.io/pa
 
 The Sea.js plugin for loading CommonJS modules directly.
 
-It would wrap files with 'define(function(require, exports, module) {})' block so that you can load CommonJS modules without wrapping it first.
+It would wrap files with `define(function(require, exports, module) {})` block so that you can load CommonJS modules without wrapping it first.
 
 It could only load modules in the same domain, so please use it in **developement environment**.
 
