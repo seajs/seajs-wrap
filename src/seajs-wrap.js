@@ -14,7 +14,7 @@ seajs.on("resolve", function(data) {
     return;
   }
 
-  var m = id.match(/[^?]+?(\.\w+)?(\?.*)?$/)
+  var m = id.match(/[^?]+?(\.\w+)?([\?#].*)?$/)
   // not parse those types
   var WhiteListReg = /\.(tpl|html|json|handlebars|css)/i
 
