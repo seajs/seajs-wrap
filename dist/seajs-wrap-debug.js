@@ -66,7 +66,10 @@ function xhr(url, callback) {
     if (r.readyState === 4) {
       // Support local file
       if (r.status > 399 && r.status < 600) {
-        throw new Error("Could not load: " + url + ", status = " + r.status)
+        seajs.emit("error", {
+          uri: url,
+          status: r.status
+        })
       }
       else {
         callback(r.responseText)
