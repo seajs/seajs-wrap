@@ -9,6 +9,10 @@ seajs.on("resolve", function(data) {
   var id = data.id
   if (!id) return ""
 
+  if(/\.css$/.test(data.id) && /\.css\.js$/.test(data.uri)) {
+    data.uri = data.uri.replace(/.js$/, "")
+  }
+
   // avoid seajs-css plugin conflict
   if (/\.css\.js$/.test(id)) {
     return;
